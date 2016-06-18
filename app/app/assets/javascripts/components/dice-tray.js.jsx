@@ -22,7 +22,7 @@ var DiceTray = React.createClass({
     render: function() {
         var diceState = this.state.dice.map(function(value, index) {
             var draggable = value != 0 ? "true" : "false";
-            return <div className="dice-wrapper"
+            return <div className="dice-draggable"
                         onDragStart={ this.dragDiceStart }
                         onDragEnd={ this.dragDiceEnd }
                         key={ index }
