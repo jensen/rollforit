@@ -16,6 +16,13 @@ body {
     user-select: none;
 }
 
+.title-panel {
+    position: relative;
+    padding: 12px;
+    height: 32px;
+    background-color: #95A5A6;
+}
+
 .game-board {
     margin: auto;
     padding: 12px;
