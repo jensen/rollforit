@@ -1,6 +1,13 @@
-body {
+* {
     margin: 0;
     padding: 0;
+}
+
+html, body {
+    height: 100%
+}
+
+body {
     background-color: #ECF0F1;
 }
 
@@ -9,9 +16,17 @@ body {
     user-select: none;
 }
 
-.dice-tray {
-    float: left;
-    margin: 0;
-    padding: 0;
+.game-board {
+    margin: auto;
+    padding: 12px;
+}
+
+.player-panel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 12px;
+    height: 128px;
     background-color: #3498DB;
 }

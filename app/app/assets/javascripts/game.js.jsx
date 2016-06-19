@@ -2,6 +2,7 @@ var Game = React.createClass({
     render: function() {
         return (
             <div className="game">
+                <GameBoard />
                 <Panel />
             </div>
         );
