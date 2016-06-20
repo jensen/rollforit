@@ -1,4 +1,4 @@
-.dice-draggable {
+.dice-wrapper {
     margin: 6px;
     float: left;
 }
@@ -72,11 +72,6 @@
 
 .five-dice .dice-column:nth-of-type(2) {
     justify-content: center;
-}
-
-.six-dice {
-    display: flex;
-    background-color: #ECF0F1;
 }
 
 [class$="dice"] {

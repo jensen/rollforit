@@ -9,7 +9,10 @@ var AllDice = [
         displayName: 'OneDice',
         render: function() {
             return (
-                <div className="one-dice">
+                <div className="one-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <span className="dot"></span>
                 </div>
             );
@@ -19,7 +22,10 @@ var AllDice = [
         displayName: 'TwoDice',
         render: function() {
             return (
-                <div className="two-dice" draggable="true">
+                <div className="two-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <span className="dot"></span>
                     <span className="dot"></span>
                 </div>
@@ -30,7 +36,10 @@ var AllDice = [
         displayName: 'ThreeDice',
         render: function() {
             return (
-                <div className="three-dice">
+                <div className="three-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <span className="dot"></span>
                     <span className="dot"></span>
                     <span className="dot"></span>
@@ -42,7 +51,10 @@ var AllDice = [
         displayName: 'FourDice',
         render: function() {
             return (
-                <div className="four-dice">
+                <div className="four-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <div className="dice-column">
                         <span className="dot"></span>
                         <span className="dot"></span>
@@ -59,7 +71,10 @@ var AllDice = [
         displayName: 'FiveDice',
         render: function() {
             return (
-                <div className="five-dice">
+                <div className="five-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <div className="dice-column">
                         <span className="dot"></span>
                         <span className="dot"></span>
@@ -79,7 +94,10 @@ var AllDice = [
         displayName: 'SixDice',
         render: function() {
             return (
-                <div className="six-dice">
+                <div className="six-dice"
+                     draggable={ this.props.draggable }
+                     onDragStart={ this.props.ondragstart }
+                     onDragEnd={ this.props.ondragend }>
                     <div className="dice-column">
                         <span className="dot"></span>
                         <span className="dot"></span>
@@ -95,6 +113,18 @@ var AllDice = [
         }
     })
 ];
+
+var DraggableDice = React.createClass({
+    dragDiceStart: function(event) {
+    },
+    dragDiceEnd: function(event) {
+    },
+    render: function() {
+        var diceValue = this.props.data;
+        var draggableProperties = { draggable: true, ondragstart: this.dragDiceStart, ondragend: this.dragDiceEnd };
+        return React.createElement(AllDice[diceValue], Object.assign({}, this.props, draggableProperties));
+    }
+});
 
 var Dice = React.createClass({
     render: function() {

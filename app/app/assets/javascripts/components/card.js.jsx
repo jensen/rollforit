@@ -12,7 +12,9 @@ var CardType = {
         displayName: 'TwoCard',
         render: function() {
             return (
-                <div className="two-point two-card">
+                <div className="two-point two-card"
+                     onDrop={ this.props.ondrop }
+                     onDragOver={ this.props.dropallow } >
                     { React.createElement(AllDice[this.props.dice[0]]) }
                     { React.createElement(AllDice[this.props.dice[1]]) }
                 </div>
@@ -23,7 +25,9 @@ var CardType = {
         displayName: 'ThreeCard',
         render: function() {
             return (
-                <div className="five-point three-card">
+                <div className="five-point three-card"
+                     onDrop={ this.props.ondrop }
+                     onDragOver={ this.props.dropallow } >
                     <div className="card-column">
                         { React.createElement(AllDice[this.props.dice[0]]) }
                     </div>
@@ -41,7 +45,9 @@ var CardType = {
         displayName: 'FourCard',
         render: function() {
             return (
-                <div className="ten-point four-card">
+                <div className="ten-point four-card"
+                     onDrop={ this.props.ondrop }
+                     onDragOver={ this.props.dropallow } >
                     <div className="card-column">
                         { React.createElement(AllDice[this.props.dice[0]]) }
                         { React.createElement(AllDice[this.props.dice[1]]) }
@@ -58,7 +64,9 @@ var CardType = {
         displayName: 'SixCard',
         render: function() {
             return (
-                <div className="fifteen-point six-card">
+                <div className="fifteen-point six-card"
+                     onDrop={ this.props.ondrop }
+                     onDragOver={ this.props.dropallow } >
                     <div className="card-column">
                         { React.createElement(AllDice[this.props.dice[0]]) }
                         { React.createElement(AllDice[this.props.dice[1]]) }
@@ -76,10 +84,16 @@ var CardType = {
 }
 
 var Card = React.createClass({
+    onDrop: function(event) {
+    },
+    dropAllow: function(event) {
+        event.preventDefault();
+    },
     render: function() {
-        var cardType = this.props.data.length;
-        var diceValue = this.props.data;
+        var cardId = this.props.data["id"];
+        var diceValue = this.props.data["dice"];
+        var cardType = diceValue.length;
 
-        return React.createElement(CardType[cardType], { dice: diceValue });
+        return React.createElement(CardType[cardType], { id: cardId, dice: diceValue, ondrop: this.onDrop, dropallow: this.dropAllow });
     }
 });

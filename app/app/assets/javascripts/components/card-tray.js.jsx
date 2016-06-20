@@ -12,7 +12,10 @@ var CardTray = React.createClass({
     },
     render: function() {
         var cardState = this.state.cards.map(function(value, index) {
-            return ( <div className="card-wrapper" key={ index }><Card data={ value } /></div> );
+            return <div className="card-wrapper"
+                        key={ index }>
+                        <Card data={{ id: index, dice: value }} />
+                    </div>
         }.bind(this));
 
         return (
