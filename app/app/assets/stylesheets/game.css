@@ -39,5 +39,10 @@ body {
     left: 0;
     padding: 12px;
     height: 128px;
-    background-color: #3498DB;
+    background-color: #BDC3C7;
+}
+
+.player-panel h1 {
+    font-family: Source Sans Pro;
+    color: #ECF0F1;
 }

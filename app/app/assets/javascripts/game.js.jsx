@@ -4,7 +4,7 @@ var Game = React.createClass({
             <div className="game">
                 <Header />
                 <GameBoard />
-                <Panel />
+                <Panel url='/player' />
             </div>
         );
     }
