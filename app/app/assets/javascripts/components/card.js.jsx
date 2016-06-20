@@ -15,8 +15,8 @@ var CardType = {
                 <div className="two-point two-card"
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
-                    { React.createElement(AllDice[this.props.dice[0]]) }
-                    { React.createElement(AllDice[this.props.dice[1]]) }
+                    <Dice data={ this.props.dice[0]} />
+                    <Dice data={ this.props.dice[1]} />
                 </div>
             );
         }
@@ -29,13 +29,13 @@ var CardType = {
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[0]]) }
+                        <Dice data={ this.props.dice[0]} />
                     </div>
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[1]]) }
+                        <Dice data={ this.props.dice[1]} />
                     </div>
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[2]]) }
+                        <Dice data={ this.props.dice[2]} />
                     </div>
                 </div>
             );
@@ -49,12 +49,12 @@ var CardType = {
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[0]]) }
-                        { React.createElement(AllDice[this.props.dice[1]]) }
+                        <Dice data={ this.props.dice[0]} />
+                        <Dice data={ this.props.dice[1]} />
                     </div>
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[2]]) }
-                        { React.createElement(AllDice[this.props.dice[3]]) }
+                        <Dice data={ this.props.dice[2]} />
+                        <Dice data={ this.props.dice[3]} />
                     </div>
                 </div>
             );
@@ -68,14 +68,14 @@ var CardType = {
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[0]]) }
-                        { React.createElement(AllDice[this.props.dice[1]]) }
-                        { React.createElement(AllDice[this.props.dice[2]]) }
+                        <Dice data={ this.props.dice[0]} />
+                        <Dice data={ this.props.dice[1]} />
+                        <Dice data={ this.props.dice[2]} />
                     </div>
                     <div className="card-column">
-                        { React.createElement(AllDice[this.props.dice[3]]) }
-                        { React.createElement(AllDice[this.props.dice[4]]) }
-                        { React.createElement(AllDice[this.props.dice[5]]) }
+                        <Dice data={ this.props.dice[3]} />
+                        <Dice data={ this.props.dice[4]} />
+                        <Dice data={ this.props.dice[5]} />
                     </div>
                 </div>
             );
