@@ -9,7 +9,8 @@ var AllDice = [
         displayName: 'OneDice',
         render: function() {
             return (
-                <div className="one-dice"
+                <div id={ this.props.id }
+                     className="one-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -22,7 +23,8 @@ var AllDice = [
         displayName: 'TwoDice',
         render: function() {
             return (
-                <div className="two-dice"
+                <div id={ this.props.id }
+                     className="two-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -36,7 +38,8 @@ var AllDice = [
         displayName: 'ThreeDice',
         render: function() {
             return (
-                <div className="three-dice"
+                <div id={ this.props.id }
+                     className="three-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -51,7 +54,8 @@ var AllDice = [
         displayName: 'FourDice',
         render: function() {
             return (
-                <div className="four-dice"
+                <div id={ this.props.id }
+                     className="four-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -71,7 +75,8 @@ var AllDice = [
         displayName: 'FiveDice',
         render: function() {
             return (
-                <div className="five-dice"
+                <div id={ this.props.id }
+                     className="five-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -94,7 +99,8 @@ var AllDice = [
         displayName: 'SixDice',
         render: function() {
             return (
-                <div className="six-dice"
+                <div id={ this.props.id }
+                     className="six-dice"
                      draggable={ this.props.draggable }
                      onDragStart={ this.props.ondragstart }
                      onDragEnd={ this.props.ondragend }>
@@ -116,12 +122,14 @@ var AllDice = [
 
 var DraggableDice = React.createClass({
     dragDiceStart: function(event) {
+        event.dataTransfer.setData('Text', event.target.id);
     },
     dragDiceEnd: function(event) {
+        event.dataTransfer.clearData();
     },
     render: function() {
         var diceValue = this.props.data;
-        var draggableProperties = { draggable: true, ondragstart: this.dragDiceStart, ondragend: this.dragDiceEnd };
+        var draggableProperties = { id: 'dragdice' + diceValue, draggable: true, ondragstart: this.dragDiceStart, ondragend: this.dragDiceEnd };
         return React.createElement(AllDice[diceValue], Object.assign({}, this.props, draggableProperties));
     }
 });

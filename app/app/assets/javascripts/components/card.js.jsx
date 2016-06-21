@@ -12,7 +12,8 @@ var CardType = {
         displayName: 'TwoCard',
         render: function() {
             return (
-                <div className="two-point two-card"
+                <div id={ this.props.id }
+                     className="two-point two-card"
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <Dice data={ this.props.dice[0]} />
@@ -25,7 +26,8 @@ var CardType = {
         displayName: 'ThreeCard',
         render: function() {
             return (
-                <div className="five-point three-card"
+                <div id={ this.props.id }
+                     className="five-point three-card"
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
@@ -45,7 +47,8 @@ var CardType = {
         displayName: 'FourCard',
         render: function() {
             return (
-                <div className="ten-point four-card"
+                <div id={ this.props.id }
+                     className="ten-point four-card"
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
@@ -64,7 +67,8 @@ var CardType = {
         displayName: 'SixCard',
         render: function() {
             return (
-                <div className="fifteen-point six-card"
+                <div id={ this.props.id }
+                     className="fifteen-point six-card"
                      onDrop={ this.props.ondrop }
                      onDragOver={ this.props.dropallow } >
                     <div className="card-column">
@@ -85,6 +89,8 @@ var CardType = {
 
 var Card = React.createClass({
     onDrop: function(event) {
+        var sourceElement = event.dataTransfer.getData('Text');
+        var targetElement = event.target.id;
     },
     dropAllow: function(event) {
         event.preventDefault();
@@ -94,6 +100,6 @@ var Card = React.createClass({
         var diceValue = this.props.data["dice"];
         var cardType = diceValue.length;
 
-        return React.createElement(CardType[cardType], { id: cardId, dice: diceValue, ondrop: this.onDrop, dropallow: this.dropAllow });
+        return React.createElement(CardType[cardType], { id: 'dropcard' + cardId, dice: diceValue, ondrop: this.onDrop, dropallow: this.dropAllow });
     }
 });

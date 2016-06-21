@@ -17,7 +17,7 @@ var DiceTray = React.createClass({
         var diceState = this.state.dice.map(function(value, index) {
             return <div className="dice-wrapper" key={ index } style={{ backgroundColor: this.props.emptyDiceColor }} >
                         <DraggableDice data={ value } />
-                    </div>
+                   </div>
         }.bind(this));
 
         return (

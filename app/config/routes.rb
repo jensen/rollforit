@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'player/index'
-
   get 'player' => 'player#index'
   get 'dice' => 'dice#index'
   get 'cards' => 'cards#index'
