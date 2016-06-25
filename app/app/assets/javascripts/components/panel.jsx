@@ -6,11 +6,29 @@ var Panel = React.createClass({
         this.getPlayerProfile();
     },
     getPlayerColor: function(slot) {
-        var colors = [ '#BDC3C7', '#1ABC9C', '#3498DB', '#9B59B6', '#F1C40F', '#E67E22', '#E74C3C' ];
+        var colors = [
+            '#BDC3C7',
+            '#1ABC9C',
+            '#3498DB',
+            '#9B59B6',
+            '#F1C40F',
+            '#E67E22',
+            '#E74C3C'
+        ];
+
         return colors[slot];
     },
     getDiceTrayColor: function(slot) {
-        var colors = [ '#95A5A6', '#16A085', '#2980B9', '#8E44AD', '#F39C12', '#D35400', '#C0392B' ];
+        var colors = [
+            '#95A5A6',
+            '#16A085',
+            '#2980B9',
+            '#8E44AD',
+            '#F39C12',
+            '#D35400',
+            '#C0392B'
+        ];
+
         return colors[slot];
     },
     getPlayerProfile: function() {

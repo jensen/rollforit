@@ -1,0 +1,17 @@
+<h1>Game</h1>
+<p>Total Players: <%= @game.players.count %></p>
+<ul>
+<% @game.players.each do |player| %>
+    <li><%= player.slot %><%= player.name %></li>
+<% end %>
+</ul>
+
+<% if @game.waiting_for_players? %>
+    <%= form_for @game do |f| %>
+        <%= f.submit "Start Game" %>
+    <% end %>
+<% end %>
+
+<% if @game.in_progress? %>
+    <%= @game.cards %>
+<% end %>

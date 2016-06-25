@@ -1,0 +1,19 @@
+<h1>Create Player</h1>
+<%= form_for([@game, @game.players.build]) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, :value => @player.name %><br/ >
+    <% @game.slots.each do |slot| %>
+        <%= f.radio_button :slot, slot %>
+        <%= f.label :slot, :value => slot, class: 'player_' + slot.to_s %>
+    <% end %>
+    <br />
+    <%= f.submit "Play" %><br />
+<% end %>
+<% if @player.errors.any? %>
+    <h2>Error</h2>
+    <ul>
+    <% @player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>

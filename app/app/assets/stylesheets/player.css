@@ -1,0 +1,39 @@
+.player_0 {
+    background-color: #1ABC9C
+}
+.player_1 {
+    background-color: #3498DB
+}
+.player_2 {
+    background-color: #9B59B6
+}
+.player_3 {
+    background-color: #F1C40F
+}
+.player_4 {
+    background-color: #E67E22
+}
+.player_5 {
+    background-color: #E74C3C
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=radio] + label {
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+input[type=radio]:checked + label {
+    background-color: #BDC3C7;
+}
