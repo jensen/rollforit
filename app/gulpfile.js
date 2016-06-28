@@ -22,7 +22,6 @@ const files = {
 }
 
 gulp.task('webpack:build', function(callback) {
-
     webpack(WebpackConfig, function(error, stats) {
         if (error) throw new GulpUtility.PluginError('webpack', error);
         GulpUtility.log('[webpack]', stats.toString({}));
@@ -71,7 +70,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:watch', function() {
-    gulp.watch('client/assets/stylesheets/')
+    gulp.watch(path.resolve(paths.styles, 'sass/**/*.scss'), ['sass']);
 })
 
 gulp.task('clean', function() {
@@ -84,6 +83,6 @@ gulp.task('build:rails', ['webpack:build', 'sass'], function() {
 });
 
 gulp.task('dev:rails', ['clean', 'build:rails']);
-gulp.task('dev:client', ['clean', 'sass', 'webpack:build', 'webpack:server']);
+gulp.task('dev:client', ['clean', 'sass', 'sass:watch', 'webpack:build', 'webpack:server']);
 
 gulp.task('default', ['dev:rails']);
