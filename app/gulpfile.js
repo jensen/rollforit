@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
 const clean = require('gulp-clean');
 const webpack = require('webpack');
 const path = require('path');
@@ -10,7 +12,9 @@ const WebpackDevServer = require('webpack-dev-server');
 
 const paths = {
     build: path.resolve(WebpackConfig.output.path),
-    output: path.resolve(WebpackConfig.output.path, WebpackConfig.output.filename)
+    output: path.resolve(WebpackConfig.output.path, WebpackConfig.output.filename),
+    scripts: path.resolve('client/assets/javascripts'),
+    styles: path.resolve('client/assets/stylesheets')
 };
 
 const files = {
@@ -18,12 +22,14 @@ const files = {
 }
 
 gulp.task('webpack:build', function(callback) {
-    gulp.src(['client/assets/html/index.html'])
-        .pipe(gulp.dest('client/build'));
 
     webpack(WebpackConfig, function(error, stats) {
         if (error) throw new GulpUtility.PluginError('webpack', error);
         GulpUtility.log('[webpack]', stats.toString({}));
+
+        gulp.src(['client/assets/html/index.html'])
+            .pipe(gulp.dest('client/build'));
+
         callback();
     });
 });
@@ -55,15 +61,29 @@ gulp.task('webpack:server', function(callback) {
     });
 });
 
+gulp.task('sass', function() {
+    return gulp.src(path.resolve(paths.styles, 'sass/**/*.scss'))
+        .pipe(sass({
+            includePaths: require('node-normalize-scss').includePaths
+        }).on('error', sass.logError))
+        .pipe(rename('app-bundle-generated.css'))
+        .pipe(gulp.dest(paths.build));
+});
+
+gulp.task('sass:watch', function() {
+    gulp.watch('client/assets/stylesheets/')
+})
+
 gulp.task('clean', function() {
     return gulp.src(['client/build/*.*', path.resolve('app/assets/javascripts', files.bundle)], { read: false }).pipe(clean());
 });
 
-gulp.task('build:rails', ['webpack:build'], function() {
+gulp.task('build:rails', ['webpack:build', 'sass'], function() {
+    gulp.src(paths.output).pipe(gulp.dest('app/assets/stylesheets'));
     return gulp.src(paths.output).pipe(gulp.dest('app/assets/javascripts'));
 });
 
 gulp.task('dev:rails', ['clean', 'build:rails']);
-gulp.task('dev:client', ['clean', 'webpack:build', 'webpack:server']);
+gulp.task('dev:client', ['clean', 'sass', 'webpack:build', 'webpack:server']);
 
 gulp.task('default', ['dev:rails']);
