@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Don't commit node_modules
+/node_modules
+
+# Don't commit generated webpack file
+*-generated.*
