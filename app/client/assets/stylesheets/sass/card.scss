@@ -1,0 +1,46 @@
+.card {
+    @include border-radius(12px);
+    display: flex;
+    height: 112px;
+    padding: 10px;
+    margin: 20px 0 20px 0;
+}
+
+.two-card {
+    @extend .card;
+    justify-content: space-between;
+}
+
+.two-card [class$="dice"]:nth-of-type(2) {
+    align-self: flex-end;
+}
+
+.three-card {
+    @extend .card;
+    justify-content: space-between;
+}
+
+.three-card .card-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.three-card .card-column:nth-of-type(2) {
+    justify-content: center;
+}
+
+.three-card .card-column:nth-of-type(3) {
+    justify-content: flex-end;
+}
+
+.four-card, .six-card {
+    @extend .card;
+    justify-content: space-between;
+}
+
+.four-card .card-column, .six-card .card-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

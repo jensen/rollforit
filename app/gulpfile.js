@@ -61,7 +61,7 @@ gulp.task('webpack:server', function(callback) {
 });
 
 gulp.task('sass', function() {
-    return gulp.src(path.resolve(paths.styles, 'sass/**/*.scss'))
+    return gulp.src(path.resolve(paths.styles, 'sass/app.scss'))
         .pipe(sass({
             includePaths: require('node-normalize-scss').includePaths
         }).on('error', sass.logError))

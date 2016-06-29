@@ -1,0 +1,20 @@
+$font-stack: Montserrat, sans-serif;
+$font-color: #fff;
+
+$background-color: #ECF0F1;
+
+$player-colors: (0: #1ABC9C, 1: #3498DB, 2: #9B59B6, 3: #F1C40F, 4: #E67E22, 5: #E74C3C);
+
+$card-colors: (2: #3498DB, 3: #F1C40F, 4: #2ECC71, 6: #9B59B6);
+
+$grid-col-width: 50px;
+$grid-gutter: 10px;
+
+$dot-color-dark: #2C3E50;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}

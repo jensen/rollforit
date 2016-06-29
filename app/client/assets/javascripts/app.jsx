@@ -37,11 +37,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="app">
-                <Rack type={ GameConstants.TYPE_CARD } data={ this.state.allCards } />
-                <Rack type={ GameConstants.TYPE_DICE } data={ this.state.playerDice } />
-                <Rack type={ GameConstants.TYPE_CARD } data={ this.state.playerCards } />
-            </div>
+            <div className="grid"></div>
         );
     }
 }

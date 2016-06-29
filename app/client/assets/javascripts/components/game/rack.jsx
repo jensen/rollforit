@@ -24,7 +24,7 @@ class Rack extends React.Component {
 
     render() {
         if(this.props.data.length === 0) {
-            return ( <div className='rack rack-empty'></div> );
+            return ( <div className='rack rack-empty'></div> ); 
         }
 
         if( this.props.type === GameConstants.TYPE_CARD) {

@@ -1,26 +1,8 @@
 @import "normalize";
+@import "variables";
 
-$font-stack: Helvetica, sans-serif;
-$foreground-color: #2C3E50;
-$background-color: #ECF0F1;
-
-$player-color-0: #1ABC9C;
-$player-color-1: #3498DB;
-$player-color-2: #9B59B6;
-$player-color-3: #F1C40F;
-$player-color-4: #E67E22;
-$player-color-5: #E74C3C;
-
-$card-color-2: #3498DB;
-$card-color-3: #F1C40F;
-$card-color-4: #2ECC71;
-$card-color-6: #9B59B6;
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+html, body {
+    height: 100%;
 }
 
 body {
@@ -28,37 +10,16 @@ body {
     background-color: $background-color;
 }
 
-.app {
-    padding: 12px;
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
 }
 
-.button {
-    display: inline-block;
-    padding: 12px;
-    text-decoration: none;
-
-    @include border-radius(8px);
-    border: 2px solid $foreground-color;
-
-    color: $foreground-color;
-    background-color: $background-color;
-
-    &:hover {
-        color: $background-color;
-        background-color: $foreground-color;
-    }
+p {
+    margin-top: 10px;
 }
 
-.rack {
-    padding-top: 6px;
-    padding-bottom: 6px;
-}
+@import "grid";
 
-.card {
-    padding-top: 6px;
-    padding-bottom: 6px;
-}
-
-.dice {
-    margin-right: 6px;
-}
+@import "game";
+@import "card";
+@import "dice";

@@ -1,0 +1,21 @@
+.grid {
+    width: 100%;
+    height: 100%;
+}
+.grid-col {
+    float: left;
+    height: 100%;
+    margin-right: $grid-gutter;
+}
+
+@for $i from 1 through 2 {
+    .grid-col-#{$i} {
+        @extend .grid-col;
+        @if $i > 1 {
+            width: $grid-col-width * $i + $grid-gutter * ($i - 1);
+        }
+        @if $i == 1 {
+            width: $grid-col-width;
+        }
+    }
+}

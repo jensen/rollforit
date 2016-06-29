@@ -1,0 +1,87 @@
+.dot {
+    @include border-radius(50%);
+    display: block;
+    background-color: $dot-color-dark;
+}
+
+.dot-small {
+    @extend .dot;
+    width: 6px;
+    height: 6px;
+}
+
+.dot-big {
+    @extend .dot;
+    width: 10px;
+    height: 10px;
+}
+
+.dice {
+    @include border-radius(5px);
+    display: flex;
+    background-color: #fff;
+}
+
+.dice-small {
+    @extend .dice;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+}
+
+.dice-big {
+    @extend .dice;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin: 20px auto 20px auto;
+}
+
+.one-dice {
+    justify-content: center;
+    align-items: center;
+}
+
+.two-dice {
+    justify-content: space-between;
+}
+
+.two-dice .dot:nth-of-type(2) {
+    align-self: flex-end;
+}
+
+.three-dice {
+    justify-content: space-between;
+}
+
+.three-dice .dot:nth-of-type(2) {
+    align-self: center;
+}
+
+.three-dice .dot:nth-of-type(3) {
+    align-self: flex-end;
+}
+
+.four-dice, .six-dice {
+    justify-content: space-between;
+}
+
+.four-dice .dice-column, .six-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice {
+    justify-content: space-between;
+}
+
+.five-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice .dice-column:nth-of-type(2) {
+    justify-content: center;
+}
