@@ -33,21 +33,26 @@ class App extends React.Component {
     retrieveState() {
         return {
             allCards: this.store.getCards(),
-            playerDice: this.store.getDice(),
-            playerCards: this.store.getPlayerCards()
+            allPlayers: this.store.getPlayers(),
+            currentPlayer: this.store.getCurrentPlayer()
         };
     }
 
     render() {
-        let players = [0, 1, 2, 3, 4, 5].map(function(value) {
-            return <PlayerInfo key={value} playerId={value} playerName="Karl" playerScore="0"/>
+        let players = this.state.allPlayers.map(function(value, index) {
+            let id = value.id;
+            let name = value.name;
+            let score = value.score;
+            let dice = value.dice.assigned;
+
+            return <PlayerInfo key={ index } playerId={ id } playerName={ name } playerScore={ score } playerDice={ dice }/>
         });
 
         return (
             <div className="grid">
-                <PlayerLocal/>
+                <PlayerLocal data={ this.state.currentPlayer }/>
                 <Spacer gridColumns="2"/>
-                <CardTray/>
+                <CardTray allCards={ this.state.allCards }/>
                 <Spacer gridColumns="1"/>
                 { players }
             </div>

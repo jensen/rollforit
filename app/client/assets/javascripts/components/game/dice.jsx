@@ -68,7 +68,7 @@ class Dice extends React.Component {
                     </div>
                 </div>
             );
-            default: return <div></div>;
+            default: return <div className={ 'no-dice dice-' + size }>&nbsp;</div>;
         }
     }
 

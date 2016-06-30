@@ -10,6 +10,7 @@ class Card extends React.Component {
     }
 
     renderCard(dice, values, visible) {
+        dice = dice.toString();
         values = values.map(v => v.toString());
         visible = visible || false;
 

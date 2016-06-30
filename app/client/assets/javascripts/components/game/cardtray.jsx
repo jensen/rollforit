@@ -10,13 +10,14 @@ class CardTray extends React.Component {
     }
 
     render() {
+        let cards = this.props.allCards.map(function(value, index) {
+            return (<Card key={ index } diceCount={ value.length } diceData={ value } backgroundVisible={ true }/>);
+        });
+
         return (
             <div className="grid-col-2">
                 <div className="header"></div>
-                <Card diceCount="2" diceData={ [1, 6] } backgroundVisible={ true } />
-                <Card diceCount="3" diceData={ [2, 4, 6] } backgroundVisible={ true }/>
-                <Card diceCount="4" diceData={ [1, 2, 5, 6] } backgroundVisible={ true }/>
-                <Card diceCount="6" diceData={ [1, 2, 3, 4, 5, 6] } backgroundVisible={ true }/>
+                { cards }
             </div>
         );
     }

@@ -50,7 +50,51 @@ class GameStore extends EventEmitter {
         this.game.deck = GameStoreHelper.shuffleDeck();
         this.game.current_player = 0;
         this.game.players = [
-            {name: "Karl", dice: [1, 1, 2, 2, 3, 3 ], cards: []}
+            {
+                id: 0,
+                name: "Susan",
+                dice: {
+                    available: [1, 1, 2, 2, 3, 3 ],
+                    assigned: [[0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
+                },
+                score: 0
+            },
+            {
+                id: 1,
+                name: "Malloy",
+                dice: {
+                    available: [0, 0, 0, 0, 0, 0],
+                    assigned: [[1, 6], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
+                },
+                score: 0
+            },
+            {
+                id: 2,
+                name: "Jambon",
+                dice: {
+                    available: [0, 0, 0, 0, 0, 0],
+                    assigned: [[0, 6], [0, 0, 0], [0, 2, 5, 0], [0, 0, 0, 0, 0, 0]]
+                },
+                score: 0
+            },
+            {
+                id: 3,
+                name: "Freemont",
+                dice: {
+                    available: [0, 0, 0, 0, 0, 0],
+                    assigned: [[1, 0], [2, 4, 0], [0, 2, 5, 0], [0, 0, 0, 0, 0, 0]]
+                },
+                score: 0
+            },
+            {
+                id: 4,
+                name: "Tove",
+                dice: {
+                    available: [0, 0, 0, 0, 0, 0],
+                    assigned: [[0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
+                },
+                score: 0
+            }
         ];
 
         this.game.cards = [];
@@ -90,12 +134,12 @@ class GameStore extends EventEmitter {
         return this.game.cards;
     }
 
-    getDice() {
-        return this.game.players[this.game.current_player].dice;
+    getPlayers() {
+        return this.game.players;
     }
 
-    getPlayerCards() {
-        return this.game.players[this.game.current_player].cards;
+    getCurrentPlayer() {
+        return this.game.players[this.game.current_player];
     }
 
     takeCard(card) {

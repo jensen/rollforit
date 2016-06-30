@@ -37,6 +37,11 @@
     margin: 20px auto 20px auto;
 }
 
+.no-dice {
+    @extend .dice;
+    display: none;
+}
+
 .one-dice {
     justify-content: center;
     align-items: center;
