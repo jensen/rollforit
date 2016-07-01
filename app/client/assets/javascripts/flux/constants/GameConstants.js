@@ -13,7 +13,7 @@ class GameConstants {
             'GAME_END',
             'GAME_DEAL_CARDS',
             'GAME_PLAYER_ROLL_DICE',
-            'GAME_PLAYER_NEXT_TURN',
+            'GAME_PLAYER_END_TURN',
             'GAME_PLAYER_TAKE_CARD',
             'TYPE_CARD',
             'TYPE_DICE'

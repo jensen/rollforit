@@ -1,13 +1,14 @@
-<h1>Create Player</h1>
+<h1>Please enter your name and choose a colour:</h1>
 <%= form_for([@game, @game.players.build]) do |f| %>
-    <%= f.label :name %>
     <%= f.text_field :name, :value => @player.name %><br/ >
     <% @game.slots.each do |slot| %>
         <%= f.radio_button :slot, slot %>
-        <%= f.label :slot, :value => slot, class: 'player_' + slot.to_s %>
+        <%= f.label :slot, :value => slot do -%>
+        <% '<div id=dice#{slot}></div>'.html_safe %>
+        <% end %>
     <% end %>
     <br />
-    <%= f.submit "Play" %><br />
+    <%= f.button "Join Game" %><br />
 <% end %>
 <% if @player.errors.any? %>
     <h2>Error</h2>

@@ -14,9 +14,11 @@ class PlayerInfo extends React.Component {
             return ( <Card key={ index } diceCount={ value.length } diceData={ value } />)
         });
 
+        let selected = this.props.playerCurrent ? 'current_player' : '';
+
         return (
-            <div className={ 'grid-col-2 player-color-' + this.props.playerId }>
-                <div className="header">
+            <div className={ 'grid-col-2 player-color-' + this.props.playerSlot }>
+                <div className={ 'header ' + selected }>
                     <h3>{ this.props.playerName }</h3>
                     <p>{ this.props.playerScore }</p>
                 </div>

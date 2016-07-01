@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Ready from 'doc-ready';
 
-import PlayerLocal from './components/game/playerlocal';
+import PlayerCurrent from './components/game/playercurrent';
 import Spacer from './components/game/spacer';
 import CardTray from './components/game/cardtray';
 import PlayerInfo from './components/game/playerinfo';
@@ -15,7 +15,6 @@ class App extends React.Component {
         super(props);
 
         this.store = new GameStore();
-        this.state = this.retrieveState();
     }
 
     componentDidMount() {
@@ -34,23 +33,37 @@ class App extends React.Component {
         return {
             allCards: this.store.getCards(),
             allPlayers: this.store.getPlayers(),
+            localPlayer: this.store.getLocalPlayer(),
             currentPlayer: this.store.getCurrentPlayer()
         };
     }
 
     render() {
+        if(this.state == null) {
+            return (<div className="loader"></div>);
+        }
+
         let players = this.state.allPlayers.map(function(value, index) {
-            let id = value.id;
+            let slot = value.slot;
             let name = value.name;
             let score = value.score;
             let dice = value.dice.assigned;
+            let current = value.is_current;
 
-            return <PlayerInfo key={ index } playerId={ id } playerName={ name } playerScore={ score } playerDice={ dice }/>
+            return (
+                <PlayerInfo
+                    key={ index }
+                    playerCurrent={ current }
+                    playerSlot={ slot }
+                    playerName={ name }
+                    playerScore={ score }
+                    playerDice={ dice }/>
+            );
         });
 
         return (
             <div className="grid">
-                <PlayerLocal data={ this.state.currentPlayer }/>
+                <PlayerCurrent currentPlayer={ this.state.currentPlayer }/>
                 <Spacer gridColumns="2"/>
                 <CardTray allCards={ this.state.allCards }/>
                 <Spacer gridColumns="1"/>

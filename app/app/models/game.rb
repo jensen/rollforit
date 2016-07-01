@@ -8,7 +8,17 @@ class Game < ActiveRecord::Base
     serialize :slots, Array
 
     # association
-    has_many :players
+    has_many :players do
+        def admin
+            where(:is_admin => true).first
+        end
+        def current
+            where(:is_current => true).first
+        end
+    end
+
+    has_many :cards
+
     accepts_nested_attributes_for :players
 
     # validations

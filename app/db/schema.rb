@@ -20,32 +20,37 @@ ActiveRecord::Schema.define(version: 20160624053635) do
     t.integer  "point_value"
     t.integer  "max_dice"
     t.text     "dice"
+    t.integer  "game_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "cards", ["game_id"], name: "index_cards_on_game_id", using: :btree
+
   create_table "games", force: :cascade do |t|
+    t.integer  "state",      default: 0
+    t.string   "slots",      default: "---\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n"
+    t.text     "draw_deck",  default: "--- []\n"
     t.string   "share_link"
-    t.integer  "admin_player"
-    t.integer  "current_player"
-    t.text     "draw_deck",      default: "--- []\n"
-    t.text     "discard_deck",   default: "--- []\n"
-    t.string   "slots",          default: "---\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n"
-    t.string   "cards",          default: "--- []\n"
-    t.integer  "state",          default: 0
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
     t.integer  "slot"
+    t.integer  "score",          default: 0
+    t.string   "dice_available", default: "--- []\n"
+    t.string   "dice_assigned",  default: "--- []\n"
+    t.boolean  "is_admin",       default: false
+    t.boolean  "is_current",     default: false
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "players", ["game_id"], name: "index_players_on_game_id", using: :btree
 
+  add_foreign_key "cards", "games"
   add_foreign_key "players", "games"
 end

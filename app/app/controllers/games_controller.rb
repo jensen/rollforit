@@ -22,40 +22,71 @@ class GamesController < ApplicationController
     end
 
     def show
-        @game = Game.find(params[:id])
-
         if session[:current_player]
             render template: "games/show"
-            #redirect_to action: 'show_share_link', share_link: @game.share_link
         else
+            @game = Game.find(params[:id])
             redirect_to new_game_player_path @game.id
         end
     end
 
-    def update
-        @game = Game.find(params[:id])
+    def start
+        @game = Game.find(params[:game_id])
 
         if @game.waiting_for_players?
             draw_deck = Card.all.shuffle.map { |card| card[:id] }
+            cards = draw_deck.shift(@game.players.count < 5 ? 3 : 4)
 
-            cards = @game.players.count < 5 ? 3 : 4
-            cards.times do
-                @game.cards.push(draw_deck.shift)
-            end
-
+            @game.cards = Card.find(cards)
+            @game.players.map { |player| player.initialize_dice }
             @game.draw_deck = draw_deck
-
             @game.in_progress!
-
             @game.save
         end
 
-        redirect_to game_path @game.id
+        respond_to do |format|
+            format.html { head :no_content, status: :ok }
+        end
+    end
+
+    def store
+        @game = Game.find(session[:current_game])
+
+        @store = {}
+        @store[:game_id] = @game.id
+        @store[:cards] = game_cards(@game.cards)
+        @store[:players] = game_players(@game.players.order(:id))
+        @store[:current_player] = @game.players.current
+        @store[:local_player] = Player.find(session[:current_player])
+
+        respond_to do |format|
+            format.json do
+                render json: @store.to_json
+            end
+        end
     end
 
     private
 
     def game_params
         params.require(:game).permit(players_attributes: [:name, :slot])
+    end
+
+    def game_cards(cards)
+        return cards.map { |card| card.dice }
+    end
+
+    def game_players(players)
+        return players.map { |player| {
+            :id => player.id,
+            :slot => player.slot,
+            :name => player.name,
+            :score => player.score,
+            :dice => {
+                :available => player.dice_available,
+                :assigned => player.dice_assigned
+            },
+            :is_current => player.is_current
+        } }
     end
 end

@@ -12,13 +12,15 @@ const WebpackDevServer = require('webpack-dev-server');
 
 const paths = {
     build: path.resolve(WebpackConfig.output.path),
-    output: path.resolve(WebpackConfig.output.path, WebpackConfig.output.filename),
+    output_js: path.resolve(WebpackConfig.output.path, WebpackConfig.output.filename),
+    output_css: path.resolve(WebpackConfig.output.path, WebpackConfig.output.filename),
     scripts: path.resolve('client/assets/javascripts'),
     styles: path.resolve('client/assets/stylesheets')
 };
 
 const files = {
-    bundle: WebpackConfig.output.filename
+    bundle_js: WebpackConfig.output.filename,
+    bundle_css: 'app-bundle-generated.css'
 }
 
 gulp.task('webpack:build', function(callback) {
@@ -65,7 +67,7 @@ gulp.task('sass', function() {
         .pipe(sass({
             includePaths: require('node-normalize-scss').includePaths
         }).on('error', sass.logError))
-        .pipe(rename('app-bundle-generated.css'))
+        .pipe(rename(files.bundle_css))
         .pipe(gulp.dest(paths.build));
 });
 
@@ -74,12 +76,12 @@ gulp.task('sass:watch', function() {
 })
 
 gulp.task('clean', function() {
-    return gulp.src(['client/build/*.*', path.resolve('app/assets/javascripts', files.bundle)], { read: false }).pipe(clean());
+    return gulp.src(['client/build/*.*', path.resolve('app/assets/javascripts', files.bundle_js)], { read: false }).pipe(clean());
 });
 
 gulp.task('build:rails', ['webpack:build', 'sass'], function() {
-    gulp.src(paths.output).pipe(gulp.dest('app/assets/stylesheets'));
-    return gulp.src(paths.output).pipe(gulp.dest('app/assets/javascripts'));
+    gulp.src(path.resolve(paths.build, files.bundle_css)).pipe(gulp.dest('app/assets/stylesheets'));
+    return gulp.src(paths.output_js).pipe(gulp.dest('app/assets/javascripts'));
 });
 
 gulp.task('dev:rails', ['clean', 'build:rails']);

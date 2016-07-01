@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :games do
-      resources :players
+      put :start
+      resources :players do
+          put :roll
+          put :turn
+      end
   end
+
+  get 'store' => 'games#store'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
