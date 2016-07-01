@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Card and Dice</title>
+<style>
+body {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+.dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #2C3E50;
+}
+
+.one-dice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.two-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.two-dice .dot:nth-of-type(2) {
+    align-self: flex-end;
+}
+
+.three-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.three-dice .dot:nth-of-type(2) {
+    align-self: center;
+}
+
+.three-dice .dot:nth-of-type(3) {
+    align-self: flex-end;
+}
+
+.four-dice, .six-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.four-dice .dice-column, .six-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.five-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice .dice-column:nth-of-type(2) {
+    justify-content: center;
+}
+
+.six-dice {
+    display: flex;
+}
+
+[class$="dice"] {
+    width: 32px;
+    height: 32px;
+    margin: 0px;
+    padding: 4px;
+    background-color: #ECF0F1;
+    border-radius: 8px;
+}
+
+.two-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.two-card [class$="dice"]:nth-of-type(2) {
+    align-self: flex-end;
+}
+
+.three-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.three-card .card-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.three-card .card-column:nth-of-type(2) {
+    justify-content: center;
+}
+
+.three-card .card-column:nth-of-type(3) {
+    justify-content: flex-end;
+}
+
+.four-card, .six-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.four-card .card-column, .six-card .card-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+[class$="card"] {
+    width: 120px;
+    height: 160px;
+    margin: 2px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+[class$="card"]:hover {
+    background-color: #7F8C8D;
+}
+
+.two-point {
+    background-color: #3498DB;
+}
+
+.five-point {
+    background-color: #F1C40F;
+}
+
+.ten-point {
+    background-color: #2ECC71;
+}
+
+.fifteen-point {
+    background-color: #9B59B6;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="two-point two-card">
+        <div class="one-dice">
+                <span class="dot"></span>
+        </div>
+        <div class="five-dice">
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+    <div class="five-point three-card">
+        <div class="card-column">
+            <div class="one-dice">
+                    <span class="dot"></span>
+            </div>
+        </div>
+        <div class="card-column">
+            <div class="three-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <div class="card-column">
+            <div class="five-dice">
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ten-point four-card">
+        <div class="card-column">
+            <div class="one-dice">
+                    <span class="dot"></span>
+            </div>
+            <div class="one-dice">
+                    <span class="dot"></span>
+            </div>
+        </div>
+        <div class="card-column">
+            <div class="three-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="three-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+    <div class="fifteen-point six-card">
+        <div class="card-column">
+            <div class="one-dice">
+                <span class="dot"></span>
+            </div>
+            <div class="two-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="three-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <div class="card-column">
+            <div class="four-dice">
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <div class="five-dice">
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <div class="six-dice">
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="dice-column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

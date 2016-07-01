@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Player Panel</title>
+<style>
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+.dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #2C3E50;
+}
+
+.one-dice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.two-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.two-dice .dot:nth-of-type(2) {
+    align-self: flex-end;
+}
+
+.three-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.three-dice .dot:nth-of-type(2) {
+    align-self: center;
+}
+
+.three-dice .dot:nth-of-type(3) {
+    align-self: flex-end;
+}
+
+.four-dice, .six-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.four-dice .dice-column, .six-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.five-dice .dice-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.five-dice .dice-column:nth-of-type(2) {
+    justify-content: center;
+}
+
+.six-dice {
+    display: flex;
+}
+
+[class$="dice"] {
+    width: 32px;
+    height: 32px;
+    margin: 2px;
+    padding: 4px;
+    background-color: #ECF0F1;
+    border-radius: 8px;
+}
+
+[class$="dice"]:hover {
+    background-color: #BDC3C7;
+}
+
+.two-point {
+    background-color: #3498DB;
+}
+
+.five-point {
+    background-color: #F1C40F;
+}
+
+.ten-point {
+    background-color: #1ABC9C;
+}
+
+.fifteen-point {
+    background-color: #9B59B6;
+}
+
+.one-player {
+    background-color: #1ABC9C;
+}
+
+.two-player {
+    background-color: #3498DB;
+}
+
+.three-player {
+    background-color: #9B59B6;
+}
+
+.four-player {
+    background-color: #F1C40F;
+}
+
+.five-player {
+    background-color: #E67E22;
+}
+
+.six-player {
+    background-color: #E74C3C;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+#player-panel {
+   position: fixed;
+   left: 0px;
+   bottom: 0px;
+   height: 120px;
+   width: 100%;
+}
+
+.container {
+}
+
+.container ul {
+    list-style: none;
+}
+
+.container ul li {
+    float: left;
+}
+
+.btn {
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #2C3E50;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #34495E;
+  text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+<div id="player-panel" class="six-player">
+<div class="container">
+    <ul>
+        <li>
+            <div class="one-dice">
+                <span class="dot"></span>
+            </div>
+        </li>
+        <li>
+            <div class="two-dice">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </li>
+        <li>
+        <div class="three-dice">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        </li>
+        <li>
+        <div class="four-dice">
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        </li>
+        <li>
+        <div class="five-dice">
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        </li>
+        <li>
+        <div class="six-dice">
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="dice-column">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        </li>
+    </ul>
+</div>
+<a class="btn">
+</a>
+</div>
+</body>
+</html>
