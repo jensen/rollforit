@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         end
     end
 
-    get 'store' => 'games#store'
+    get '/store' => 'games#store'
 
     root 'games#index'
 end

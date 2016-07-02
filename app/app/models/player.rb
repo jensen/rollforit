@@ -31,7 +31,8 @@ class Player < ActiveRecord::Base
         sum = self.dice_available.inject(0) { | sum, n | sum + n }
 
         # when all dice are 0 we know we can roll
-        if sum == 0
+        # you still have to be the current player
+        if sum == 0 and self.is_current
             self.dice_available = rollable.times.map { |n| 1 + Random.rand(5) }
             self.save
 

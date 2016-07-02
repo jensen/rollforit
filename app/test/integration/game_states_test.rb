@@ -1,22 +1,34 @@
 require 'test_helper'
 
 class GameStatesTest < ActionDispatch::IntegrationTest
-    test "can start game with more than one player" do
+    setup do
         start_game(games(:game).id)
     end
 
+    test "can start game with more than one player" do
+        # just runs start_game
+    end
+
+    test "player who starts game is current" do
+        assert games(:game).players.current == players(:malloy)
+    end
+
     test "can roll dice as current player" do
-        start_game(games(:game).id)
         assert sum(games(:game).players.current.dice_available) == 0
 
         roll_dice(games(:game).id, players(:malloy).id)
         assert sum(games(:game).players.current.dice_available) > 0
     end
 
-    test "can assign dice to card" do
-        start_game(games(:game).id)
-        assert games(:game).players.current == players(:malloy)
+    test "can't roll dice if not current player" do
+        assert sum(players(:susan).dice_available) == 0
+        roll_dice(games(:game).id, players(:susan).id)
 
+        @player = Player.find(players(:susan).id)
+        assert sum(@player.dice_available) == 0
+    end
+
+    test "can assign dice to card" do
         # lucky roll
         @player = players(:malloy)
         @player.dice_available = [1, 1, 1, 1, 1, 1]
@@ -29,9 +41,6 @@ class GameStatesTest < ActionDispatch::IntegrationTest
     end
 
     test "shouldn't be able to assign dice to card" do
-        start_game(games(:game).id)
-        assert games(:game).players.current == players(:malloy)
-
         @player = players(:malloy)
         @player.dice_available = [2, 1, 1, 1, 1, 1]
         @player.save
@@ -45,7 +54,6 @@ class GameStatesTest < ActionDispatch::IntegrationTest
     test "can end turn as current player" do
         @player = players(:malloy)
 
-        start_game(games(:game).id)
         assert games(:game).players.current == @player, "current player isn't first"
 
         roll_dice(games(:game).id, @player.id)
@@ -60,7 +68,7 @@ class GameStatesTest < ActionDispatch::IntegrationTest
     private
 
     def start_game(game_id)
-        put "/games/#{games(:game).id}/start"
+        put "/games/#{game_id}/start"
         assert_response :success
     end
 
