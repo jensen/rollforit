@@ -1,0 +1,38 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+malloy:
+    name: 'Malloy'
+    slot: 0
+    game_id: 1
+    is_admin: true
+    is_current: true
+
+susan:
+    name: 'Susan'
+    slot: 1
+    game_id: 1
+
+jambon:
+    name: 'Jambon'
+    slot: 2
+    game_id: 1
+
+frickets:
+    name: 'Frickets'
+    slot: 3
+    game_id: 1
+
+lisa:
+    name: 'Lisa'
+    slot: 4
+    game_id: 1
+
+lucky:
+    name: 'Lucky'
+    slot: 5
+    game_id: 1
