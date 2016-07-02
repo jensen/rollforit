@@ -17,3 +17,5 @@
 
 # Don't commit generated webpack file
 *-generated.*
+
+.byebug_history
