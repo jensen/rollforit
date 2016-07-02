@@ -52,12 +52,22 @@ class GamesController < ApplicationController
     def store
         @game = Game.find(session[:current_game])
 
-        @store = {}
-        @store[:game_id] = @game.id
-        @store[:cards] = game_cards(@game.cards)
-        @store[:players] = game_players(@game.players.order(:id))
-        @store[:current_player] = @game.players.current
-        @store[:local_player] = Player.find(session[:current_player])
+        @players = {
+            :local => Player.find(session[:current_player]),
+            :current => @game.players.current
+        }
+
+        @store = {
+            :game_id => @game.id,
+            :cards => game_cards(@game.cards),
+            :players => game_players(@game.players.order(:id)),
+            :current_player => @players[:current],
+            :local_player => @players[:local],
+            :validation => {
+                :dice => validation_dice(@game, @players[:local]),
+                :actions => validation_actions(@game, @players[:local])
+            }
+        }
 
         respond_to do |format|
             format.json do
@@ -88,5 +98,30 @@ class GamesController < ApplicationController
             },
             :is_current => player.is_current
         } }
+    end
+
+    def validation_actions(game, player)
+
+
+        return actions = {
+            :start_game => player.is_admin && game.waiting_for_players?,
+            :roll_dice => player.is_current && !player.dice_rolled? && game.in_progress?,
+            :end_turn => player.is_current && game.in_progress?
+        }
+    end
+
+    def validation_dice(game, player)
+        if player.is_current
+            return player.dice_available.map do |dice|
+                game.cards.map.with_index do |card, index|
+                    possible = card.dice_of_value(dice)
+                    available = player.dice_assigned_to_card(dice, index)
+
+                    possible - available
+                end
+            end
+        else
+            return []
+        end
     end
 end

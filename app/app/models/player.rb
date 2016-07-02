@@ -28,11 +28,11 @@ class Player < ActiveRecord::Base
 
     def roll_dice
         rollable = self.dice_available.length
-        sum = self.dice_available.inject(0) { | sum, n | sum + n }
+
 
         # when all dice are 0 we know we can roll
         # you still have to be the current player
-        if sum == 0 and self.is_current
+        if !dice_rolled? and self.is_current
             self.dice_available = rollable.times.map { |n| 1 + Random.rand(5) }
             self.save
 
@@ -64,5 +64,10 @@ class Player < ActiveRecord::Base
     def dice_assigned_to_card(dice_value, card_index)
         total = self.dice_assigned[card_index].select { |n| n == dice_value }
         return total.length
+    end
+
+    def dice_rolled?
+        sum = self.dice_available.inject(0) { | sum, n | sum + n }
+        return sum > 0
     end
 end

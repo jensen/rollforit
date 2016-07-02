@@ -88,7 +88,8 @@ class PlayersController < ApplicationController
     end
 
     def card_can_accept_dice(game, player, card_index, dice_value)
-        on_card = game.cards[card_index].how_many_dice_of_value(dice_value)
+        # TODO: duplicated functionality between this and the games controller
+        on_card = game.cards[card_index].dice_of_value(dice_value)
         assigned = player.dice_assigned_to_card(dice_value, card_index)
         return assigned < on_card
     end

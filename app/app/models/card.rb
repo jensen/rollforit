@@ -3,7 +3,7 @@ class Card < ActiveRecord::Base
 
     belongs_to :game
 
-    def how_many_dice_of_value(dice_value)
+    def dice_of_value(dice_value)
         total = self.dice.select { |n| n == dice_value }
         return total.length
     end
