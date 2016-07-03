@@ -34,7 +34,8 @@ class App extends React.Component {
             allCards: this.store.getCards(),
             allPlayers: this.store.getPlayers(),
             localPlayer: this.store.getLocalPlayer(),
-            currentPlayer: this.store.getCurrentPlayer()
+            currentPlayer: this.store.getCurrentPlayer(),
+            clientValidation: this.store.getClientValidation()
         };
     }
 
@@ -63,7 +64,9 @@ class App extends React.Component {
 
         return (
             <div className="grid">
-                <PlayerCurrent currentPlayer={ this.state.currentPlayer }/>
+                <PlayerCurrent
+                    currentPlayer={ this.state.currentPlayer }
+                    availableActions={ this.state.clientValidation.actions }/>
                 <Spacer gridColumns="2"/>
                 <CardTray allCards={ this.state.allCards }/>
                 <Spacer gridColumns="1"/>

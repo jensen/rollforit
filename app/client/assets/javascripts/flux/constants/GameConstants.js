@@ -1,6 +1,6 @@
 class GameConstants {
     static mirror(list) {
-        return list.reduce(function(object, value/*, index */) {
+        return list.reduce(function(object, value /*, index */ ) {
             object[value] = value;
             return object;
         }, {});

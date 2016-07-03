@@ -14,6 +14,7 @@ class PlayersController < ApplicationController
             @game.slots.delete(params[:player][:slot].to_i)
             @game.save
 
+            session[:current_game] = @game.id
             session[:current_player] = @player.id
 
             redirect_to game_path @game

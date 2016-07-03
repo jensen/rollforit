@@ -6,16 +6,29 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import GameConstants from '../constants/GameConstants';
 
 class GameStoreHelper {
+    static Request(url, method, cb) {
+        // Development
+        if (true) {
+            url = '/api' + url;
+        }
+
+        Reqwest({
+            url: url,
+            method: method,
+            success: cb
+        });
+    }
+
     static getRequest(url, cb) {
-        Reqwest({ url: url, method: 'get', success: cb });
+        GameStoreHelper.Request(url, 'get', cb);
     }
 
     static postRequest(url, cb) {
-        Reqwest({ url: url, method: 'post', success: cb });
+        GameStoreHelper.Request(url, 'post', cb);
     }
 
     static putRequest(url, cb) {
-        Reqwest({ url: url, method: 'put', success: cb });
+        GameStoreHelper.Request(url, 'put', cb);
     }
 }
 
@@ -29,14 +42,14 @@ class GameStore extends EventEmitter {
     }
 
     requestState(cb) {
-        GameStoreHelper.getRequest('/api/store.json/', function(r) {
+        GameStoreHelper.getRequest('/store.json', function(r) {
             this.game = r;
             this.emitChange();
         }.bind(this));
     }
 
     dispatcherCallback(action) {
-        switch(action.actionType) {
+        switch (action.actionType) {
             case GameConstants.GAME_START:
                 this.startGame();
                 break;
@@ -44,7 +57,7 @@ class GameStore extends EventEmitter {
             case GameConstants.GAME_PLAYER_ROLL_DICE:
                 this.rollDice();
                 break;
-    
+
             case GameConstants.GAME_PLAYER_END_TURN:
                 this.endTurn();
                 break;
@@ -79,8 +92,12 @@ class GameStore extends EventEmitter {
         return this.game.current_player;
     }
 
+    getClientValidation() {
+        return this.game.validation;
+    }
+
     startGame() {
-        let url = '/api/games/' + this.game.game_id + '/start';
+        let url = '/games/' + this.game.game_id + '/start';
 
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();
@@ -88,7 +105,7 @@ class GameStore extends EventEmitter {
     }
 
     rollDice() {
-        let url = '/api/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/roll';
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/roll';
 
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();
@@ -96,7 +113,7 @@ class GameStore extends EventEmitter {
     }
 
     endTurn() {
-        let url = '/api/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/turn';
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/turn';
 
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();

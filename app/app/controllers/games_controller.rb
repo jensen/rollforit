@@ -26,6 +26,7 @@ class GamesController < ApplicationController
             render template: "games/show"
         else
             @game = Game.find(params[:id])
+
             redirect_to new_game_player_path @game.id
         end
     end
@@ -101,8 +102,6 @@ class GamesController < ApplicationController
     end
 
     def validation_actions(game, player)
-
-
         return actions = {
             :start_game => player.is_admin && game.waiting_for_players?,
             :roll_dice => player.is_current && !player.dice_rolled? && game.in_progress?,
@@ -120,8 +119,8 @@ class GamesController < ApplicationController
                     possible - available
                 end
             end
-        else
-            return []
         end
+
+        return []
     end
 end
