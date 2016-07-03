@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Drag from '../../utility/drag'
+
 import GameActions from '../../flux/actions/GameActions';
 
 import Dice from './dice';
@@ -69,7 +71,17 @@ class Card extends React.Component {
     }
 
     render() {
-        return this.renderCard(this.props.diceCount, this.props.diceData, this.props.backgroundVisible);
+        var cardRender = this.renderCard(this.props.diceCount, this.props.diceData, this.props.backgroundVisible);
+
+        if(this.props.allowDrop) {
+            return React.cloneElement(cardRender, {
+                id: this.props.id,
+                onDrop: Drag.GetInstance().onDrop,
+                onDragOver: Drag.GetInstance().onDragOver
+            })
+        }
+
+        return cardRender;
     }
 }
 

@@ -58,6 +58,10 @@ class GameStore extends EventEmitter {
                 this.rollDice();
                 break;
 
+            case GameConstants.GAME_PLAYER_ASSIGN_DICE:
+                this.assignDice(action.dice, action.card);
+                break;
+
             case GameConstants.GAME_PLAYER_END_TURN:
                 this.endTurn();
                 break;
@@ -106,6 +110,15 @@ class GameStore extends EventEmitter {
 
     rollDice() {
         let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/roll';
+
+        GameStoreHelper.putRequest(url, function(r) {
+            this.requestState();
+        }.bind(this));
+    }
+
+    assignDice(dice, card) {
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/assign/' + dice + '/' +
+            card;
 
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();

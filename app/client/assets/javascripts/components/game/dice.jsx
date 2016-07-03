@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Drag from '../../utility/drag'
+
 class Dice extends React.Component {
     constructor(props) {
         super(props);
@@ -73,7 +75,16 @@ class Dice extends React.Component {
     }
 
     render() {
-        return this.renderDice(this.props.diceSize, this.props.dotCount);
+        var diceRender = this.renderDice(this.props.diceSize, this.props.dotCount);
+        if(this.props.allowDrag == true) {
+            return React.cloneElement(diceRender, {
+                id: this.props.id,
+                draggable: true,
+                onDragStart: Drag.GetInstance().onDragStart,
+                onDragEnd: Drag.GetInstance().onDragEnd
+            });
+        }
+        return diceRender;
     }
 }
 

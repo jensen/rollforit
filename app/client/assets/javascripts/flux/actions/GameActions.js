@@ -2,8 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import GameConstants from '../constants/GameConstants';
 
 class GameActions {
-    constructor() {
-    }
+    constructor() {}
 
     static startGame() {
         AppDispatcher.dispatch({
@@ -14,6 +13,14 @@ class GameActions {
     static rollDice() {
         AppDispatcher.dispatch({
             actionType: GameConstants.GAME_PLAYER_ROLL_DICE
+        });
+    }
+
+    static assignDice(dice, card) {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_PLAYER_ASSIGN_DICE,
+            dice: dice,
+            card: card
         });
     }
 

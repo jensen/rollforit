@@ -11,7 +11,15 @@ class CardTray extends React.Component {
 
     render() {
         let cards = this.props.allCards.map(function(value, index) {
-            return (<Card key={ index } diceCount={ value.length } diceData={ value } backgroundVisible={ true }/>);
+            return (
+                <Card
+                    key={ index }
+                    id={ 'card-droppable-' + index }
+                    diceCount={ value.length }
+                    diceData={ value }
+                    backgroundVisible={ true }
+                    allowDrop={ true }/>
+            );
         });
 
         return (

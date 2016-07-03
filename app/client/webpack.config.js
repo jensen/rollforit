@@ -13,17 +13,16 @@ module.exports = {
         filename: 'app-bundle-generated.js'
     },
     module: {
-        loaders: [
-            {
-                test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
-                include: [ js_path ],
-                exclude: /(node_modules)/,
-                query: {
-                    presets: ['es2015', 'react']
-                }
+        loaders: [{
+            test: /\.(js|jsx)$/,
+            loader: 'babel-loader',
+            include: [js_path],
+            exclude: /(node_modules)/,
+            query: {
+                presets: ['es2015', 'react'],
+                plugins: ["transform-class-properties"]
             }
-        ]
+        }]
     },
     resolve: {
         extensions: ['', '.js', '.jsx']

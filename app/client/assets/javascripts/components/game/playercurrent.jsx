@@ -24,17 +24,18 @@ class PlayerCurrent extends React.Component {
 
     render() {
         let dice = this.props.currentPlayer.dice_available.map(function(value, index) {
-            return <Dice key={ index } diceSize="big" dotCount={ value }/>;
+            return <Dice key={ index } id={ 'dice-draggable-' + index } diceSize="big" dotCount={ value } allowDrag={ true }/>;
         });
 
         let actions = [];
+        let index = 0;
 
         if(this.props.availableActions.start_game) {
-            actions.push(<Button className="button" onClick={ this.startGame }>Start Game</Button>);
+            actions.push(<Button key={ index++ } className="button" onClick={ this.startGame }>Start Game</Button>);
         } else if(this.props.availableActions.roll_dice) {
-            actions.push(<Button className="button" onClick={ this.rollDice }>Roll Dice</Button>);
+            actions.push(<Button key={ index++ } className="button" onClick={ this.rollDice }>Roll Dice</Button>);
         } else if(this.props.availableActions.end_turn) {
-            actions.push(<Button className="button" onClick={ this.endTurn }>End Turn</Button>);
+            actions.push(<Button key={ index++ } className="button" onClick={ this.endTurn }>End Turn</Button>);
         }
 
         return (
