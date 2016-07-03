@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
     resources :games do
         put :start
         resources :players do

@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
     # serialization
     serialize :draw_deck, Array
     serialize :discard_deck, Array

@@ -1,4 +1,4 @@
-class Player < ActiveRecord::Base
+class Player < ApplicationRecord
     # serialization
     serialize :dice_available, Array
     serialize :dice_pending, Array

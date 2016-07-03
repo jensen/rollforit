@@ -1,4 +1,4 @@
-class Card < ActiveRecord::Base
+class Card < ApplicationRecord
     serialize :dice, Array
 
     belongs_to :game
