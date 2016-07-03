@@ -11,28 +11,34 @@ malloy:
     game_id: 1
     is_admin: true
     is_current: true
+    score: 0
 
 susan:
     name: 'Susan'
     slot: 1
     game_id: 1
+    score: 0
 
 jambon:
     name: 'Jambon'
     slot: 2
     game_id: 1
+    score: 0
 
 frickets:
     name: 'Frickets'
     slot: 3
     game_id: 1
+    score: 0
 
 lisa:
     name: 'Lisa'
     slot: 4
     game_id: 1
+    score: 0
 
 lucky:
     name: 'Lucky'
     slot: 5
     game_id: 1
+    score: 0

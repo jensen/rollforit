@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
     # serialization
     serialize :dice_available, Array
+    serialize :dice_pending, Array
     serialize :dice_assigned, Array
 
     # association
@@ -21,19 +22,18 @@ class Player < ActiveRecord::Base
         game = Game.find(self.game_id)
 
         self.dice_available = 6.times.map { |n| 0 }
-
+        self.dice_pending = []
         self.dice_assigned = game.cards.map { |card| Array.new(card.dice.length, 0) }
+
         self.save
     end
 
     def roll_dice
         rollable = self.dice_available.length
 
-
-        # when all dice are 0 we know we can roll
-        # you still have to be the current player
         if !dice_rolled? and self.is_current
             self.dice_available = rollable.times.map { |n| 1 + Random.rand(5) }
+            self.has_rolled = true
             self.save
 
             return true
@@ -66,8 +66,69 @@ class Player < ActiveRecord::Base
         return total.length
     end
 
+    def increase_score(points)
+        self.score += points
+        self.save
+    end
+
+    def retrieve_dice(card_index)
+        assigned = self.dice_assigned[card_index].select { |n| n != 0 }
+        assigned.length.times do
+            self.dice_pending.push(0)
+        end
+
+        self.save
+    end
+
+    def update_assigned(card_index, count)
+        self.dice_assigned.delete_at(card_index)
+        self.dice_assigned.push(Array.new(count, 0))
+        self.save
+    end
+
+    def clear_assigned
+        self.dice_assigned = self.dice_assigned.map do |card|
+            Array.new(card.length, 0)
+        end
+        self.save
+    end
+
+    def resolve_pending
+        self.dice_available.concat(self.dice_pending)
+        self.dice_pending = []
+        self.save
+    end
+
+    def start_turn
+        self.is_current = true
+        self.has_rolled = false
+        resolve_pending
+        self.save
+    end
+
+    def end_turn
+        self.is_current = false
+        self.dice_available = self.dice_available.map { |v| 0 }
+        self.save
+    end
+
+    def dice_assigned?
+        return self.dice_available.length < 6
+    end
+
+    def no_dice?
+        return self.dice_available.length == 0
+    end
+
     def dice_rolled?
-        sum = self.dice_available.inject(0) { | sum, n | sum + n }
-        return sum > 0
+        return self.has_rolled
+    end
+
+    def filled_card?
+        result = self.dice_assigned.map do |card|
+            card.find_index(0) == nil
+        end
+
+        return result.find_index(true) != nil
     end
 end

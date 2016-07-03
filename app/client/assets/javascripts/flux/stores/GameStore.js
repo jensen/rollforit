@@ -62,6 +62,14 @@ class GameStore extends EventEmitter {
                 this.assignDice(action.dice, action.card);
                 break;
 
+            case GameConstants.GAME_PLAYER_TAKE_CARD:
+                this.takeCard();
+                break;
+
+            case GameConstants.GAME_PLAYER_RETRIEVE_DICE:
+                this.retrieveDice();
+                break;
+
             case GameConstants.GAME_PLAYER_END_TURN:
                 this.endTurn();
                 break;
@@ -119,6 +127,22 @@ class GameStore extends EventEmitter {
     assignDice(dice, card) {
         let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/assign/' + dice + '/' +
             card;
+
+        GameStoreHelper.putRequest(url, function(r) {
+            this.requestState();
+        }.bind(this));
+    }
+
+    takeCard() {
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/take';
+
+        GameStoreHelper.putRequest(url, function(r) {
+            this.requestState();
+        }.bind(this));
+    }
+
+    retrieveDice() {
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/retrieve';
 
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();

@@ -85,6 +85,7 @@ class App extends React.Component {
         return (
             <div className="grid">
                 <PlayerCurrent
+                    localPlayer={ this.state.localPlayer }
                     currentPlayer={ this.state.currentPlayer }
                     availableActions={ this.state.clientValidation.actions }/>
                 <Spacer gridColumns="2"/>

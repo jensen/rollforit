@@ -15,6 +15,8 @@ class GameConstants {
             'GAME_DEAL_CARDS',
             'GAME_PLAYER_ROLL_DICE',
             'GAME_PLAYER_ASSIGN_DICE',
+            'GAME_PLAYER_TAKE_CARD',
+            'GAME_PLAYER_RETRIEVE_DICE',
             'GAME_PLAYER_END_TURN',
             'GAME_PLAYER_TAKE_CARD',
             'TYPE_CARD',

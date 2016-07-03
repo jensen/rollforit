@@ -103,9 +103,11 @@ class GamesController < ApplicationController
 
     def validation_actions(game, player)
         return actions = {
-            :start_game => player.is_admin && game.waiting_for_players?,
+            :start_game => player.is_admin && game.players.count > 1 && game.waiting_for_players?,
             :roll_dice => player.is_current && !player.dice_rolled? && game.in_progress?,
-            :end_turn => player.is_current && game.in_progress?
+            :take_card => player.is_current && player.filled_card? && game.in_progress?,
+            :retrieve_dice => player.is_current && player.dice_assigned? && !player.dice_rolled? && game.in_progress?,
+            :end_turn => player.is_current && player.dice_rolled? && !player.filled_card? && game.in_progress?
         }
     end
 

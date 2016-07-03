@@ -7,7 +7,10 @@ class CreatePlayers < ActiveRecord::Migration
             t.integer :score, default: 0
 
             t.string :dice_available, default: []
+            t.string :dice_pending, default: []
             t.string :dice_assigned, default: []
+
+            t.boolean :has_rolled, default: false
 
             t.boolean :is_admin, default: false
             t.boolean :is_current, default: false

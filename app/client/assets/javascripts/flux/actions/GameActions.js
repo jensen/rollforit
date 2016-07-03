@@ -24,6 +24,18 @@ class GameActions {
         });
     }
 
+    static takeCard() {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_PLAYER_TAKE_CARD
+        })
+    }
+
+    static retrieveDice() {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_PLAYER_RETRIEVE_DICE
+        })
+    }
+
     static endTurn() {
         AppDispatcher.dispatch({
             actionType: GameConstants.GAME_PLAYER_END_TURN

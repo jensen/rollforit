@@ -29,6 +29,22 @@ class Game < ActiveRecord::Base
     # enums
     enum state: [ :waiting_for_players, :in_progress, :completed ]
 
+    def initialize_draw_deck
+        self.draw_deck = Card.all.shuffle.map { |card| card[:id] }
+    end
+
+    def draw_card(card_index)
+        card = Card.find(self.draw_deck.shift)
+
+        if self.cards[card_index] != nil
+            self.cards.delete(self.cards[card_index])
+        end
+
+        self.cards.push(card)
+
+        self.save
+    end
+
     private
 
     def update_share_link

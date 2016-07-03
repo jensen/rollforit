@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(version: 20160624053635) do
     t.integer  "slot"
     t.integer  "score",          default: 0
     t.string   "dice_available", default: "--- []\n"
+    t.string   "dice_pending",   default: "--- []\n"
     t.string   "dice_assigned",  default: "--- []\n"
+    t.boolean  "has_rolled",     default: false
     t.boolean  "is_admin",       default: false
     t.boolean  "is_current",     default: false
     t.integer  "game_id"

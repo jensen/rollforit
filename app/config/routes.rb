@@ -4,6 +4,8 @@ Rails.application.routes.draw do
         put :start
         resources :players do
             put :roll
+            put :take
+            put :retrieve
             put :turn
 
             put '/assign/:dice_index/:card_index', to: 'players#assign'
