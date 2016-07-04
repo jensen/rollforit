@@ -4,7 +4,8 @@ class GamesController < ApplicationController
             @games = Game.all
 
             slots = [*0..5]
-            @joinable = @games.map { |game| { :id => game.id, :buttons => slots.map { |index| join_info(game, index) } } }
+            @waiting_for_players = @games.select { |game| game.waiting_for_players? }
+            @joinable = @waiting_for_players.map { |game| { :id => game.id, :buttons => slots.map { |index| join_info(game, index) } } }
             @new = slots.map { |index| { :slot => index } }
 
             render :index
@@ -27,6 +28,7 @@ class GamesController < ApplicationController
         @game = Game.find(params[:game_id])
         @player = create_player(@game, false)
         if @player
+            StoreRelayJob.perform_now
             redirect_to @game
         else
             redirect_to "index"
