@@ -11,6 +11,9 @@ Rails.application.routes.draw do
         end
     end
 
+    post 'create' => 'games#create'
+    post '/join/:game_id' => 'games#join'
+
     get '/store' => 'games#store'
 
     root 'games#index'

@@ -35,3 +35,28 @@ a.button {
         background-color: #2C3E50;
     }
 }
+
+a.button-join {
+    @extend a.button;
+    background-color: transparent;
+}
+
+.name-editable {
+    font-size: 18pt;
+    text-align: center;
+    padding: 10px;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    background-color: #fff;
+    outline: 0px solid transparent;
+}
+
+.new-game-bar {
+    background-color: #2ECC71;
+}
+
+.join-game-bar {
+    background-color: #34495E;
+}

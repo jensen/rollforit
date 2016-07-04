@@ -102,8 +102,9 @@ class App extends React.Component {
 }
 
 Ready(function() {
-    ReactDOM.render(
-        <App/>,
-        document.getElementById('app')
-    );
+    let app = document.getElementById('app');
+
+    if(app) {
+        ReactDOM.render(<App/>, app);
+    }
 });

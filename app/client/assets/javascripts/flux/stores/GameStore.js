@@ -8,7 +8,7 @@ import GameConstants from '../constants/GameConstants';
 class GameStoreHelper {
     static Request(url, method, cb) {
         // Development
-        if (true) {
+        if (false) {
             url = '/api' + url;
         }
 

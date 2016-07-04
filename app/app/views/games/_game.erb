@@ -1,0 +1,14 @@
+<div id="name-join-game-<%= id %>" class="name-editable" contenteditable>Name</div>
+<div class="grid-row">
+    <% buttons.each do |button| %>
+        <% if button[:name] == '' %>
+            <div class="grid-col-2 player-color-<%= button[:slot] %>">
+                <a href="<%= button[:link] %>" id="join-game-<%= id %>-slot-<%= button[:slot] %>" class="button button-join">Join</a>
+            </div>
+        <% else %>
+            <div class="grid-col-2 player-color-<%= button[:slot] %>">
+                <a href="#" class="button"><%= button[:name] %></a>
+            </div>
+        <% end %>
+    <% end %>
+</div>

@@ -1,1 +1,132 @@
-<div id="app"></div>
+<div class="grid">
+    <div class="grid-col-1">&nbsp;</div>
+    <div class="grid-col-4 new-game-bar">
+        <div class="header">
+            <h3>Create New Game</h3>
+        </div>
+        <div id="name-create-game" class="name-editable" contenteditable>Name</div>
+        <% @new.each do |button| %>
+            <div class="player-color-<%= button[:slot] %>">
+                <a href="/create" id="create-game-<%= button[:slot] %>" class="button button-join">Join</a>
+            </div>
+        <% end %>
+    </div>
+    <div class="grid-col-1">&nbsp;</div>
+    <div class="grid-col-13 join-game-bar">
+        <div class="header">
+            <h3>Enter Name and Join Existing Game</h3>
+        </div>
+        <% @joinable.each do |game| %>
+            <%= render partial: "game", locals: { id: game[:id], buttons: game[:buttons] } %>
+        <% end %>
+    </div>
+    <script type="text/javascript">
+    var defaultName = 'Name';
+
+    var createForm = function(url) {
+        var form = document.createElement('form');
+
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', url);
+
+        form.params = function(key, value) {
+            var param = document.createElement('input');
+
+            param.setAttribute('type', 'hidden');
+            param.setAttribute('name', key);
+            param.setAttribute('value', value);
+
+            this.appendChild(param);
+            return this;
+        }
+
+        form.post = function() {
+            document.body.appendChild(this);
+            this.submit();
+            return false;
+        }
+
+        return form.params('authenticity_token', '<%= form_authenticity_token %>');
+    };
+
+    var handleCreateClick = function(event) {
+        var button = event.target;
+        var name = document.getElementById('name-create-game').innerText;
+        var slot = button.id.slice(-1);
+
+        if(name == '' || name == defaultName) { return false; }
+
+        return createForm(button.href)
+            .params('name', name)
+            .params('slot', slot)
+            .post();
+    };
+
+    var handleJoinClick = function(event) {
+        var button = event.target;
+        var game = button.id.slice(-8, -7)
+        var name = document.getElementById('name-join-game-' + game).innerText;
+        var slot = button.id.slice(-1);
+
+        if(name == '' || name == defaultName) { return false; }
+
+        return createForm(button.href)
+            .params('name', name)
+            .params('slot', slot)
+            .post();
+    };
+
+    var handleNameFieldFocus = function(event) {
+        var t = event.target;
+        if(t.innerText == defaultName) {
+            t.innerText = '';
+        }
+    };
+
+    var handleNameFieldBlur = function(event) {
+        var t = event.target;
+        if(t.innerText == '') {
+            t.innerText = defaultName;
+        }
+    };
+
+    var addNameField = function(element) {
+        var field = document.getElementById(element);
+        field.onfocus = handleNameFieldFocus;
+        field.onblur = handleNameFieldBlur;
+    }
+
+    var addJoinButton = function(element, cb) {
+        var button = document.getElementById(element);
+        button.onclick = cb;
+    }
+
+    var addCreateGameEvents = function() {
+        addNameField('name-create-game');
+        <% @new.each do |button| %>
+        addJoinButton('create-game-<%= button[:slot] %>', handleCreateClick);
+        <% end %>
+    };
+
+    var addJoinGameEvents = function() {
+        <% @joinable.each do |game| %>
+        addNameField('name-join-game-<%= game[:id] %>');
+            <% game[:buttons].each do |button| %>
+                <% if button[:name] == '' %>
+        addJoinButton('join-game-<%= game[:id] %>-slot-<%= button[:slot] %>', handleJoinClick);
+                <% end %>
+            <% end %>
+        <% end %>
+    }
+
+    function ready(fn) {
+        if (document.readyState != 'loading') { fn(); }
+        else { document.addEventListener('DOMContentLoaded', fn); }
+    }
+
+    ready(function(){
+        addCreateGameEvents();
+        addJoinGameEvents();
+    });
+    </script>
+</div>
