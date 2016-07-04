@@ -39,7 +39,12 @@
 
 .no-dice {
     @extend .dice;
-    display: none;
+    background-color: transparent;
+    /*
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #fff;
+    */
 }
 
 .one-dice {
