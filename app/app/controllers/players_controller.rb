@@ -50,7 +50,7 @@ class PlayersController < ApplicationController
         respond_to do |format|
             if card_can_accept_dice(@game, @player, card_index, dice_value)
                 @player.assign_dice(dice_index, card_index)
-
+                StoreRelayJob.perform_now
                 format.html { head :no_content, status: :ok }
             else
                 format.html { head :no_content, status: :error }
@@ -77,6 +77,7 @@ class PlayersController < ApplicationController
         end
 
         respond_to do |format|
+            StoreRelayJob.perform_now
             format.html { head :no_content, status: :ok }
         end
     end
@@ -93,6 +94,7 @@ class PlayersController < ApplicationController
         @player.clear_assigned
 
         respond_to do |format|
+            StoreRelayJob.perform_now
             format.html { head :no_content, status: :ok }
         end
     end
@@ -112,6 +114,7 @@ class PlayersController < ApplicationController
         next_player.start_turn
 
         respond_to do |format|
+            StoreRelayJob.perform_now
             format.html { head :no_content, status: :ok }
         end
     end

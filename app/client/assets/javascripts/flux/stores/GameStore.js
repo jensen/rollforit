@@ -41,7 +41,23 @@ class GameStore extends EventEmitter {
         AppDispatcher.register(this.dispatcherCallback.bind(this));
     }
 
-    requestState(cb) {
+    registerCableActions() {
+        return {
+            connected: this.cableConnected.bind(this),
+            disconnected: this.cableDisconnected.bind(this),
+            received: this.cableUpdated.bind(this)
+        };
+    }
+
+    cableConnected() {}
+
+    cableDisconnected() {}
+
+    cableUpdated(data) {
+        this.requestState();
+    }
+
+    requestState() {
         GameStoreHelper.getRequest('/store.json', function(r) {
             this.game = r;
             this.emitChange();

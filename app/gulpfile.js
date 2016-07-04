@@ -49,7 +49,7 @@ gulp.task('webpack:server', function(callback) {
         proxy: {
             /* access to rails api from dev server */
             '/api/*': {
-                target: 'http://localhost:3000',
+                target: 'http://[::1]:3000', // http://localhost:3000 doesn't seem to work with rails 5
                 secure: false,
                 rewrite: function(request) {
                     request.url = request.url.replace(/^\/api/, '');
@@ -76,7 +76,9 @@ gulp.task('sass:watch', function() {
 })
 
 gulp.task('clean', function() {
-    return gulp.src(['client/build/*.*', path.resolve('app/assets/javascripts', files.bundle_js)], { read: false }).pipe(clean());
+    return gulp.src(['client/build/*.*', path.resolve('app/assets/javascripts', files.bundle_js)], {
+        read: false
+    }).pipe(clean());
 });
 
 gulp.task('build:rails', ['webpack:build', 'sass'], function() {

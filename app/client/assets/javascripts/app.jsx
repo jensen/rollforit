@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Ready from 'doc-ready';
+import ActionCable from 'actioncable';
 
 import Drag from './utility/drag';
 
@@ -13,11 +14,14 @@ import GameActions from './flux/actions/GameActions';
 import GameConstants from './flux/constants/GameConstants';
 import GameStore from './flux/stores/GameStore';
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.store = new GameStore();
+        this.cable = ActionCable.createConsumer('http://localhost:3000/cable');
+        this.cable.subscriptions.create('StoreChannel', this.store.registerCableActions());
     }
 
     componentDidMount() {

@@ -14,4 +14,7 @@ Rails.application.routes.draw do
     get '/store' => 'games#store'
 
     root 'games#index'
+
+    # Serve websocket cable requests in-process
+    mount ActionCable.server => '/cable'
 end

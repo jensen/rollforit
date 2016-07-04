@@ -1,7 +1,5 @@
 import EventEmitter from 'events';
 
-import React from 'react';
-
 import GameConstants from '../flux/constants/GameConstants';
 
 class Drag extends EventEmitter{

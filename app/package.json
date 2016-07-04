@@ -4,6 +4,7 @@
   "description": "",
   "main": "",
   "dependencies": {
+    "actioncable": "^5.0.0",
     "doc-ready": "^1.0.4",
     "flux": "^2.1.1",
     "react": "^15.1.0",

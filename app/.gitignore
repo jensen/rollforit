@@ -19,3 +19,5 @@
 *-generated.*
 
 .byebug_history
+
+*.rdb
