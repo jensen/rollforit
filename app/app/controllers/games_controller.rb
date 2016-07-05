@@ -59,6 +59,7 @@ class GamesController < ApplicationController
         end
 
         respond_to do |format|
+            StoreRelayJob.perform_now
             format.html { head :no_content, status: :ok }
         end
     end

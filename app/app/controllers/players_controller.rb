@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
     def roll
         respond_to do |format|
             if Player.find(params[:player_id]).roll_dice
+                StoreRelayJob.perform_now
                 format.html { head :no_content, status: :ok }
             else
                 format.html { head :no_content, status: :error }
