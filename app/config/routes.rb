@@ -6,12 +6,13 @@ Rails.application.routes.draw do
             put :take
             put :retrieve
             put :turn
+            put :end
 
             put '/assign/:dice_index/:card_index', to: 'players#assign'
         end
     end
 
-    post 'create' => 'games#create'
+    post '/create' => 'games#create'
     post '/join/:game_id' => 'games#join'
 
     get '/store' => 'games#store'

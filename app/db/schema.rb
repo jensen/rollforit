@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160703213725) do
     t.boolean  "has_rolled",     default: false
     t.boolean  "is_admin",       default: false
     t.boolean  "is_current",     default: false
+    t.boolean  "is_last",        default: false
     t.integer  "game_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false

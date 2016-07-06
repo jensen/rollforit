@@ -24,6 +24,7 @@ class Base < ActiveRecord::Migration[5.0]
 
           t.boolean :is_admin, default: false
           t.boolean :is_current, default: false
+          t.boolean :is_last, default: false
 
           t.belongs_to :game, foreign_key: true
 

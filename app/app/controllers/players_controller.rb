@@ -80,15 +80,31 @@ class PlayersController < ApplicationController
         current_index = @game.players.find_index { |player| player.id == current_player.id }
         total_index = @game.players.count
 
+        if current_player.score >= 40 && @game.in_progress?
+            current_player.is_last = true
+            @game.last_turn!
+        end
+
         current_player.end_turn
 
-        next_player = Player.find(@game.players[(current_index + 1 + total_index) % total_index].id);
-        next_player.start_turn
+        next_index = (current_index + 1 + total_index) % total_index
+        next_player = Player.find(@game.players[next_index].id);
+
+        if next_player.is_last
+            @game.completed!
+        else
+            next_player.start_turn
+        end
 
         respond_to do |format|
             StoreRelayJob.perform_now
             format.html { head :no_content, status: :ok }
         end
+    end
+
+    def end
+        reset_session
+        redirect_to "/"
     end
 
     private

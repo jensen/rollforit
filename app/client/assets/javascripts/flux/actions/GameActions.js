@@ -41,6 +41,12 @@ class GameActions {
             actionType: GameConstants.GAME_PLAYER_END_TURN
         });
     }
+
+    static endGame() {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_PLAYER_END_GAME
+        });
+    }
 }
 
 export default GameActions;

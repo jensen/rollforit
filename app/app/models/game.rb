@@ -27,7 +27,7 @@ class Game < ApplicationRecord
     after_create :update_share_link
 
     # enums
-    enum state: [ :waiting_for_players, :in_progress, :completed ]
+    enum state: [ :waiting_for_players, :in_progress, :last_turn, :completed ]
 
     def initialize_draw_deck
         self.draw_deck = Card.all.shuffle.map { |card| card[:id] }

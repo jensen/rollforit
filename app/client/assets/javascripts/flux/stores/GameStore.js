@@ -15,6 +15,11 @@ class GameStoreHelper {
         Reqwest({
             url: url,
             method: method,
+            /* Does it make sense to send the authenticity_token EVERY time? */
+            data: [{
+                name: 'authenticity_token',
+                value: window._auth_token
+            }],
             success: cb
         });
     }
@@ -89,6 +94,10 @@ class GameStore extends EventEmitter {
             case GameConstants.GAME_PLAYER_END_TURN:
                 this.endTurn();
                 break;
+
+            case GameConstants.GAME_PLAYER_END_GAME:
+                this.endGame();
+                break;
         }
     }
 
@@ -141,7 +150,8 @@ class GameStore extends EventEmitter {
     }
 
     assignDice(dice, card) {
-        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/assign/' + dice + '/' +
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/assign/' + dice +
+            '/' +
             card;
 
         GameStoreHelper.putRequest(url, function(r) {
@@ -171,6 +181,12 @@ class GameStore extends EventEmitter {
         GameStoreHelper.putRequest(url, function(r) {
             this.requestState();
         }.bind(this));
+    }
+
+    endGame() {
+        let url = '/games/' + this.game.game_id + '/players/' + this.game.local_player.id + '/end';
+
+        GameStoreHelper.putRequest(url);
     }
 }
 

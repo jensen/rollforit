@@ -19,6 +19,7 @@ class GameConstants {
             'GAME_PLAYER_RETRIEVE_DICE',
             'GAME_PLAYER_END_TURN',
             'GAME_PLAYER_TAKE_CARD',
+            'GAME_PLAYER_END_GAME',
             'TYPE_CARD',
             'TYPE_DICE'
         ]);

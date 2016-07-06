@@ -30,20 +30,28 @@ class PlayerCurrent extends React.Component {
         GameActions.endTurn();
     }
 
+    endGame() {
+        GameActions.endGame();
+    }
+
     renderButton(label, index, callback) {
         return <Button key={ index } className="button" onClick={ callback }>{ label }</Button>;
     }
 
     render() {
-        let allowDrag = this.props.localPlayer.id == this.props.currentPlayer.id;
-        let dice = this.props.currentPlayer.dice_available.map(function(value, index) {
-            return <Dice
-                key={ index }
-                id={ 'dice-draggable-' + index }
-                diceSize="big"
-                dotCount={ value }
-                allowDrag={ allowDrag }/>;
-        });
+        let allowDrag, dice;
+
+        if(this.props.currentPlayer) {
+            allowDrag = this.props.localPlayer.id == this.props.currentPlayer.id;
+            dice = this.props.currentPlayer.dice_available.map(function(value, index) {
+                return <Dice
+                    key={ index }
+                    id={ 'dice-draggable-' + index }
+                    diceSize="big"
+                    dotCount={ value }
+                    allowDrag={ allowDrag }/>;
+            });
+        }
 
         let buttons = [
             {
@@ -71,12 +79,19 @@ class PlayerCurrent extends React.Component {
                 valid: this.props.availableActions.end_turn,
                 callback: this.endTurn
             },
+            {
+                label: 'End Game',
+                valid: this.props.availableActions.end_game,
+                callback: this.endGame
+            }
         ]
         .filter((value) => value.valid == true)
         .map((value, index) => this.renderButton(value.label, index, value.callback));
 
+        let color = this.props.currentPlayer ? 'player-color-' + this.props.currentPlayer.slot : 'current_player';
+
         return (
-            <div className={ 'grid-col-2 player-color-' + this.props.currentPlayer.slot }>
+            <div className={ 'grid-col-2 ' + color }>
                 { buttons }
                 { dice }
             </div>
