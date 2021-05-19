@@ -69,7 +69,7 @@ GEM
       pkg-config (~> 1.1.7)
     pg (0.18.4)
     pkg-config (1.1.7)
-    puma (3.4.0)
+    puma (3.12.6)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
